@@ -22,3 +22,4 @@ markdown==3.6
 xhtml2pdf==0.2.16
 numpy==1.26.4
 python-dotenv==1.0.1
+groq>=0.11.0,<2.0.0
