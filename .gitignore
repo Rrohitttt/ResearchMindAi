@@ -1,0 +1,21 @@
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/database/
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/vectorstore/*
+!backend/vectorstore/.gitkeep
+backend/generated_reports/*
+!backend/generated_reports/.gitkeep
+backend/.env
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
+
+ziprm.zip

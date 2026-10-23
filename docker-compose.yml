@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: researchmind-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # After first `docker compose up`, run once:
+    #   docker exec -it researchmind-ollama ollama pull llama3
+
+  backend:
+    build: ./backend
+    container_name: researchmind-backend
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=llama3
+      - FRONTEND_ORIGIN=http://localhost:5173
+      - DATABASE_URL=sqlite:///./database/researchmind.db
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/vectorstore:/app/vectorstore
+      - ./backend/generated_reports:/app/generated_reports
+      - ./backend/database:/app/database
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: researchmind-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  ollama_data:
