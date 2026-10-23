@@ -1,5 +1,4 @@
-const BASE_URL = "/api";
-
+const BASE_URL = "https://researchmindai-backend.onrender.com";
 function getToken(): string | null {
   return localStorage.getItem("rm_token");
 }
